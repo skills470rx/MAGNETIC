@@ -431,11 +431,12 @@ private fun ControlRow(label: String, value: String, content: @Composable () -> 
 
 @Composable
 private fun SliderRow(
-    label: String,
-    value: Float,
-    range: ClosedFloatingPointRange<Float>,
-    suffix: String = "",
-    onChange: (Float) -> Unit
+    label = "Strength",
+    range = 0f..100f,
+    suffix = "",
+    onChange = { value ->
+        strength = value
+    }
 ) {
     Column {
         Text("$label: ${"%.2f".format(value)}$suffix", fontWeight = FontWeight.SemiBold)
