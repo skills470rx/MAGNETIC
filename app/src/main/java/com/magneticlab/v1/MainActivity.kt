@@ -102,6 +102,10 @@ private fun magneticPoint(
     }
 }
 
+@OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class)
+@Composable
+private fun MagneticLabApp() {
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MagneticLabApp() {
@@ -181,14 +185,11 @@ private fun MagneticLabApp() {
         ) {
 
             Card(
-
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-
-                shape = RoundedCornerShape(18.dp)
-
-            ) {
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(420.dp),
+    shape = RoundedCornerShape(18.dp)
+) {
 
                 Canvas(
 
