@@ -208,30 +208,6 @@ private fun MagneticLabApp() {
     }
 }
 
-@Composable
-private fun ControlRow(label: String, value: String, content: @Composable () -> Unit) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(label, fontWeight = FontWeight.SemiBold)
-        content()
-    }
-}
-
-@Composable
-private fun SliderRow(
-    label: String,
-    value: Float,
-    range: ClosedFloatingPointRange<Float>,
-    suffix: String = "",
-    onChange: (Float) -> Unit
-) {
-    Column {
-        Text("$label: ${"%.2f".format(value)}$suffix", fontWeight = FontWeight.SemiBold)
-        Slider(value = value, onValueChange = onChange, valueRange = range)
-    }
-}
 package com.magneticlab.v1
 
 import android.os.Bundle
