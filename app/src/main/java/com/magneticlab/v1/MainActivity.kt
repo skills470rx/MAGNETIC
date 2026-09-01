@@ -194,7 +194,7 @@ private fun MagneticScreen() {
     Column(Modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
         LabCanvas(Modifier.fillMaxWidth().height(300.dp).background(Color(0xFF0D111A), RoundedCornerShape(18.dp)).pointerInteropFilter { event ->
             val point = Offset(event.x, event.y)
-            val actualTarget = if (target.isSpecified) target else Offset(event.x.coerceAtLeast(130f), event.y.coerceAtLeast(130f)).also { target = it }
+            val actualTarget = if (target != Offset.Unspecified) target else Offset(event.x.coerceAtLeast(130f), event.y.coerceAtLeast(130f)).also { target = it }
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> { raw.clear(); processed.clear(); movingTarget = (point - actualTarget).getDistance() < 55f; if (!movingTarget) { raw.add(point); processed.add(magneticPoint(point, actualTarget, radius, strength, smoothing, null, mode)) }; true }
                 MotionEvent.ACTION_MOVE -> { if (movingTarget) target = point else { raw.add(point); processed.add(magneticPoint(point, target, radius, strength, smoothing, processed.lastOrNull(), mode)) }; true }
@@ -202,7 +202,7 @@ private fun MagneticScreen() {
                 else -> true
             }
         }) { center ->
-            val t = if (target.isSpecified) target else center
+            val t = if (target != Offset.Unspecified) target else center
             if (showRings) for (i in 1..4) drawCircle(Blue.copy(alpha = .07f + i * .015f), radius * i / 4f, t, style = Stroke(1.5f))
             drawCircle(Blue.copy(alpha = .09f), radius, t)
             drawSignalPath(raw, Red); drawSignalPath(processed, Green)
