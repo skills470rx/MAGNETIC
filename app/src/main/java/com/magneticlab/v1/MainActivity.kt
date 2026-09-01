@@ -24,7 +24,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.weight
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -181,7 +181,7 @@ private fun QuickActions() {
 }
 
 @Composable
-private fun QuickAction(icon: androidx.compose.ui.graphics.vector.ImageVector, name: String, state: String, tint: Color) {
+private fun RowScope.QuickAction(icon: androidx.compose.ui.graphics.vector.ImageVector, name: String, state: String, tint: Color) {
     Column(Modifier.weight(1f).background(SurfaceSoft, RoundedCornerShape(10.dp)).padding(vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) { Icon(icon, name, tint = tint, modifier = Modifier.size(20.dp)); Spacer(Modifier.height(5.dp)); Text(name, color = White, fontSize = 10.sp); Text(state, color = tint, fontSize = 9.sp) }
 }
 
