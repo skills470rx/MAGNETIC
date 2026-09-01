@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MagneticLabV1"
+rootProject.name = "MagneticLabV2"
 include ':app'
