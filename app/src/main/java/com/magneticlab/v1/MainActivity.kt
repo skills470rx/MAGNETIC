@@ -19,7 +19,6 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -63,10 +62,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -170,11 +169,10 @@ private fun MagneticV21() {
 
 @Composable
 private fun RoomTabs(selected: Room, onSelect: (Room) -> Unit) {
-    TabRow(
+    ScrollableTabRow(
         selectedTabIndex = selected.ordinal,
         containerColor = Bg,
-        contentColor = Purple,
-        modifier = Modifier.horizontalScroll(rememberScrollState())
+        contentColor = Purple
     ) {
         Room.values().forEach { room ->
             Tab(
