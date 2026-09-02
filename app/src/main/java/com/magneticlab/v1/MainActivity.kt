@@ -114,37 +114,37 @@ private fun MagneticV21() {
     var room by remember { mutableStateOf(Room.HOME) }
     val context = LocalContext.current
     var snapshot by remember {
-    mutableStateOf(
-        DeviceSnapshot(
-            battery = 0,
-            ramUsed = 0,
-            ramFreeMb = 0,
-            ramTotalMb = 0,
-            storageUsed = 0,
-            storageFreeMb = 0,
-            temperature = "Loading…",
-            charging = "Unknown",
-            connection = "Unknown",
-            connected = false,
-            wifi = "Loading…",
-            link = "Loading…",
-            bluetooth = "Loading…",
-            cpu = "Loading…"
+        mutableStateOf(
+            DeviceSnapshot(
+                battery = 0,
+                ramUsed = 0,
+                ramFreeMb = 0,
+                ramTotalMb = 0,
+                storageUsed = 0,
+                storageFreeMb = 0,
+                temperature = "Loading…",
+                charging = "Unknown",
+                connection = "Unknown",
+                connected = false,
+                wifi = "Loading…",
+                link = "Loading…",
+                bluetooth = "Loading…",
+                cpu = "Loading…"
+            )
         )
-    )
-}
-
-LaunchedEffect(Unit) {
-    while (true) {
-        snapshot = runCatching {
-            readSnapshot(context)
-        }.getOrElse {
-            snapshot
-        }
-
-        kotlinx.coroutines.delay(2000)
     }
-}
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            snapshot = runCatching {
+                readSnapshot(context)
+            }.getOrElse {
+                snapshot
+            }
+            kotlinx.coroutines.delay(2000)
+        }
+    }
+
     Scaffold(containerColor = Bg, topBar = { Header(room) }) { pad ->
         Column(Modifier.fillMaxSize().padding(pad)) {
             RoomTabs(room) { room = it }
@@ -168,27 +168,27 @@ LaunchedEffect(Unit) {
     }
 }
 
-@Composable private fun RoomTabs(selected: Room, onSelect: (Room) -> Unit) {
-    PrimaryScrollableTabRow(
-    selectedTabIndex = selected.ordinal,
-    containerColor = Bg,
-    contentColor = Purple
-) {
-    Room.values().forEach { room ->
-        Tab(
-            selected = selected == room,
-            onClick = { onSelect(room) },
-            text = {
-                Text(
-                    room.title,
-                    fontSize = 11.sp,
-                    maxLines = 1
-                )
-            }
-        )
-    }
-    } {
-        Room.values().forEach { room -> Tab(selected = selected == room, onClick = { onSelect(room) }, text = { Text(room.title, fontSize = 11.sp, maxLines = 1) }) }
+@Composable
+private fun RoomTabs(selected: Room, onSelect: (Room) -> Unit) {
+    TabRow(
+        selectedTabIndex = selected.ordinal,
+        containerColor = Bg,
+        contentColor = Purple,
+        modifier = Modifier.horizontalScroll(rememberScrollState())
+    ) {
+        Room.values().forEach { room ->
+            Tab(
+                selected = selected == room,
+                onClick = { onSelect(room) },
+                text = {
+                    Text(
+                        room.title,
+                        fontSize = 11.sp,
+                        maxLines = 1
+                    )
+                }
+            )
+        }
     }
 }
 
