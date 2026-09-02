@@ -101,13 +101,6 @@ private val White = Color(0xFFF4F7FB)
 
 private enum class Room(val title: String) { HOME("Home"), COMMAND("Command"), AUTOMATIONS("Automations"), MONITOR("Monitor"), NETWORK("Network"), BOOST("Game / Boost"), LAB("Signal Lab") }
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent { MagneticV21() }
-    }
-}
-
 // PanelService.kt - Background service
 class PanelService : Service() {
     private lateinit var overlayView: PanelOverlay
