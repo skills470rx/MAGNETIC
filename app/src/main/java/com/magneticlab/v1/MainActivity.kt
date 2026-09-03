@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,6 +57,7 @@ class MainActivity : ComponentActivity() {
 private fun MagneticApp() {
     var url by remember { mutableStateOf("") }
     var result by remember { mutableStateOf("Ready") }
+    val context = LocalContext.current
 
     Box(Modifier.fillMaxSize().background(Bg)) {
         Image(
@@ -98,7 +100,7 @@ private fun MagneticApp() {
                         ) { Text("SAVE") }
 
                         Button(
-                            onClick = { openWifiSettings() },
+                            onClick = { openWifiSettings(context) },
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(containerColor = Cyan)
                         ) { Text("WI-FI") }
@@ -114,8 +116,8 @@ private fun MagneticApp() {
     }
 }
 
-private fun ComponentActivity.openWifiSettings() {
+private fun openWifiSettings(context: Context) {
     runCatching {
-        startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+        context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
     }
 }
